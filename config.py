@@ -7,13 +7,30 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def _get_setting(key: str, default: str = "") -> str:
+    # 1. Check Streamlit Secrets
     try:
         import streamlit as st
-        if hasattr(st, "secrets") and key in st.secrets:
-            return str(st.secrets[key])
+        if hasattr(st, "secrets") and st.secrets:
+            if key in st.secrets:
+                return str(st.secrets[key]).strip()
+            for k in st.secrets:
+                if k.lower() == key.lower():
+                    return str(st.secrets[k]).strip()
+            for sec in ["mongo", "mongodb", "database", "db"]:
+                if sec in st.secrets:
+                    section = st.secrets[sec]
+                    if key in section:
+                        return str(section[key]).strip()
+                    for k in section:
+                        if k.lower() == key.lower():
+                            return str(section[k]).strip()
     except Exception:
         pass
-    return os.getenv(key, default)
+    # 2. Check environment variables
+    env_val = os.getenv(key) or os.getenv(key.lower()) or os.getenv(key.upper())
+    if env_val:
+        return env_val.strip()
+    return default
 
 # MongoDB
 MONGODB_URI: str = _get_setting("MONGODB_URI", "mongodb://localhost:27017/")

@@ -143,13 +143,17 @@ def close_client() -> None:
 
 
 def _mask_uri(uri: str) -> str:
-    """Replace password in URI with *** for safe logging."""
+    """Replace password in URI with *** for safe logging and clear diagnostics."""
     try:
+        if not uri or "localhost" in uri or "127.0.0.1" in uri:
+            return "mongodb://localhost:27017/ (LOCAL DEFAULT - Streamlit Secrets Missing!)"
         from urllib.parse import urlparse, urlunparse
         parsed = urlparse(uri)
         if parsed.password:
-            netloc = parsed.netloc.replace(parsed.password, "***")
+            netloc = parsed.netloc.replace(f":{parsed.password}@", ":***@")
             return urlunparse(parsed._replace(netloc=netloc))
+        elif parsed.hostname:
+            return f"{parsed.scheme}://{parsed.hostname}"
     except Exception:
         pass
     return "<uri hidden>"

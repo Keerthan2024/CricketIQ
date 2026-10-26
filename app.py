@@ -121,7 +121,39 @@ with st.sidebar:
 
 
 if conn_error:
-    st.error(f"MongoDB connection error: {conn_error}")
+    uri = config.MONGODB_URI
+    is_localhost = not uri or "localhost" in uri or "127.0.0.1" in uri
+    if is_localhost:
+        st.error("""
+### Streamlit Cloud Secrets Missing
+The app is attempting to connect to `localhost:27017` because `MONGODB_URI` was not found in Streamlit Cloud Secrets.
+
+**How to Fix (in 1 minute):**
+1. In your Streamlit Cloud app dashboard, click **Settings** (or **Manage app** -> **Settings**).
+2. Go to the **Secrets** tab.
+3. Paste your credentials:
+```toml
+DATABASE_NAME = "CricketIQ"
+MONGODB_URI = "your_actual_mongodb_atlas_connection_string"
+```
+4. Click **Save**. The app will automatically reload and connect!
+""")
+    else:
+        from database.connection import _mask_uri
+        st.error(f"""
+### MongoDB Atlas Network Access Required
+Could not reach MongoDB Atlas cluster within 20 seconds.
+Cluster target: `{_mask_uri(uri)}`
+
+Streamlit Community Cloud runs in dynamic AWS cloud containers. To allow the cloud container to connect to your Atlas database:
+
+**How to Fix:**
+1. Log in to [MongoDB Atlas](https://cloud.mongodb.com/).
+2. In the left sidebar, click **Security** -> **Network Access**.
+3. Click **+ Add IP Address**.
+4. Select **Allow Access from Anywhere** (IP: `0.0.0.0/0`) and click **Confirm**.
+5. Wait 30 seconds for Atlas to apply the rule, then click **Reboot app** in Streamlit Cloud!
+""")
     st.stop()
 
 
