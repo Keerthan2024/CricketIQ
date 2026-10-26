@@ -64,10 +64,10 @@ if wkt_data:
                      title="Top 15 Wicket Takers")
         fig.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                           font_color="#e2e8f0",yaxis=dict(autorange="reversed"),coloraxis_showscale=False)
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
     with col_b:
         st.dataframe(df_w.rename(columns={"bowler":"Bowler","wickets":"Wickets","matches":"Matches"}),
-                     width='stretch', hide_index=True)
+                     use_container_width=True, hide_index=True)
 
 # -- Economy leaders ---------------------------------------------------------
 st.markdown('<div class="section-header">Best Economy Rates (min 20 overs)</div>', unsafe_allow_html=True)
@@ -87,7 +87,7 @@ if econ_data:
                   title="Economy Rate -- Lower is Better")
     fig2.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                        font_color="#e2e8f0",xaxis_tickangle=-45,coloraxis_showscale=False)
-    st.plotly_chart(fig2, width='stretch')
+    st.plotly_chart(fig2, use_container_width=True)
 
 # -- Bowling average ---------------------------------------------------------
 st.markdown('<div class="section-header">Bowling Averages (min 10 wickets)</div>', unsafe_allow_html=True)
@@ -103,7 +103,7 @@ if avg_data:
     df_a = pd.DataFrame(avg_data)
     st.dataframe(df_a.rename(columns={"bowler":"Bowler","wickets":"Wickets",
                                        "runs_conceded":"Runs","bowling_avg":"Average"}),
-                 width='stretch', hide_index=True)
+                 use_container_width=True, hide_index=True)
 
 # -- Season bowling trends ----------------------------------------------------
 st.markdown('<div class="section-header">Season Bowling Trends</div>', unsafe_allow_html=True)
@@ -129,4 +129,4 @@ if trend_data:
                        font_color="#e2e8f0", xaxis_tickangle=-45)
     fig3.update_xaxes(type="category")
     fig3.update_traces(connectgaps=True, line_width=2.5)
-    st.plotly_chart(fig3, width='stretch')
+    st.plotly_chart(fig3, use_container_width=True)

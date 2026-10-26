@@ -357,7 +357,7 @@ if nav_option == "Stadium Command Centre":
             )
             fig_macro.update_xaxes(type="category")
             apply_plotly_theme(fig_macro)
-            st.plotly_chart(fig_macro, width='stretch')
+            st.plotly_chart(fig_macro, use_container_width=True)
 
     with col_right:
         st.markdown('<div class="panel-title" style="margin-bottom:0.75rem;">All-Time Dynasty: Match Wins</div>', unsafe_allow_html=True)
@@ -384,7 +384,7 @@ if nav_option == "Stadium Command Centre":
             )
             fig_bar.update_layout(yaxis=dict(autorange="reversed"))
             apply_plotly_theme(fig_bar)
-            st.plotly_chart(fig_bar, width='stretch')
+            st.plotly_chart(fig_bar, use_container_width=True)
 
 
 # ===========================================================================
@@ -452,7 +452,7 @@ elif nav_option == "IPL Season Evolution":
             legend=dict(x=0.01, y=0.98),
         )
         apply_plotly_theme(fig_s1)
-        st.plotly_chart(fig_s1, width='stretch')
+        st.plotly_chart(fig_s1, use_container_width=True)
         
     with tab2:
         fig_w = px.bar(
@@ -473,7 +473,7 @@ elif nav_option == "IPL Season Evolution":
         )
         fig_w.update_xaxes(type="category")
         apply_plotly_theme(fig_w)
-        st.plotly_chart(fig_w, width='stretch')
+        st.plotly_chart(fig_w, use_container_width=True)
 
 
 # ===========================================================================
@@ -530,7 +530,7 @@ elif nav_option == "Team Performance Arena":
             ))
             fig_teams.update_layout(barmode="stack", xaxis=dict(tickangle=-45))
             apply_plotly_theme(fig_teams)
-            st.plotly_chart(fig_teams, width='stretch')
+            st.plotly_chart(fig_teams, use_container_width=True)
             
         with p2:
             st.markdown("#### Franchise Leaderboard")
@@ -542,7 +542,7 @@ elif nav_option == "Team Performance Arena":
                     "losses": "L",
                     "win_pct": "Win %"
                 }),
-                width='stretch',
+                use_container_width=True,
                 hide_index=True
             )
 
@@ -618,7 +618,7 @@ elif nav_option == "Batting Lab":
             ))
             fig_bounds.update_layout(barmode="group", xaxis=dict(tickangle=-45))
             apply_plotly_theme(fig_bounds)
-            st.plotly_chart(fig_bounds, width='stretch')
+            st.plotly_chart(fig_bounds, use_container_width=True)
             
         with tab_bat2:
             fig_scatter = px.scatter(
@@ -633,7 +633,7 @@ elif nav_option == "Batting Lab":
             )
             fig_scatter.update_traces(textposition="top center")
             apply_plotly_theme(fig_scatter)
-            st.plotly_chart(fig_scatter, width='stretch')
+            st.plotly_chart(fig_scatter, use_container_width=True)
 
 
 # ===========================================================================
@@ -684,7 +684,7 @@ elif nav_option == "Bowling Lab":
             fig_bowl.update_layout(yaxis=dict(autorange="reversed"), coloraxis_showscale=False)
             fig_bowl.update_traces(textposition="outside", textfont=dict(color="#ffffff", family="JetBrains Mono"))
             apply_plotly_theme(fig_bowl)
-            st.plotly_chart(fig_bowl, width='stretch')
+            st.plotly_chart(fig_bowl, use_container_width=True)
             
             st.markdown("#### Top Wicket Takers Table")
             st.dataframe(
@@ -693,7 +693,7 @@ elif nav_option == "Bowling Lab":
                     "wickets": "Wickets",
                     "matches": "Matches"
                 }),
-                width='stretch',
+                use_container_width=True,
                 hide_index=True
             )
             
@@ -713,7 +713,7 @@ elif nav_option == "Bowling Lab":
                 )
                 fig_econ.update_traces(textposition="outside", textfont=dict(color="#ffffff", family="JetBrains Mono"))
                 apply_plotly_theme(fig_econ)
-                st.plotly_chart(fig_econ, width='stretch')
+                st.plotly_chart(fig_econ, use_container_width=True)
                 
                 st.dataframe(
                     df_econ.rename(columns={
@@ -722,7 +722,7 @@ elif nav_option == "Bowling Lab":
                         "overs_bowled": "Overs",
                         "economy": "Economy"
                     }),
-                    width='stretch',
+                    use_container_width=True,
                     hide_index=True
                 )
 
@@ -823,7 +823,7 @@ elif nav_option == "Match Centre & Innings Momentum":
                 yaxis=dict(title="Cumulative Score"),
             )
             apply_plotly_theme(fig_momentum)
-            st.plotly_chart(fig_momentum, width='stretch')
+            st.plotly_chart(fig_momentum, use_container_width=True)
 
 
 # ===========================================================================
@@ -866,7 +866,7 @@ elif nav_option == "Venue Intelligence":
             )
             fig_v1.update_layout(yaxis=dict(autorange="reversed"))
             apply_plotly_theme(fig_v1)
-            st.plotly_chart(fig_v1, width='stretch')
+            st.plotly_chart(fig_v1, use_container_width=True)
 
     with tab_v2:
         venue_avg = get_avg_first_innings_by_venue(min_matches=5, limit=15)
@@ -884,7 +884,7 @@ elif nav_option == "Venue Intelligence":
             )
             fig_v2.update_traces(textposition="outside")
             apply_plotly_theme(fig_v2)
-            st.plotly_chart(fig_v2, width='stretch')
+            st.plotly_chart(fig_v2, use_container_width=True)
 
             st.dataframe(
                 df_va.rename(columns={
@@ -893,7 +893,7 @@ elif nav_option == "Venue Intelligence":
                     "highest": "Highest Score",
                     "matches": "Matches Analyzed"
                 }),
-                width='stretch',
+                use_container_width=True,
                 hide_index=True
             )
 
@@ -930,4 +930,4 @@ elif nav_option == "Venue Intelligence":
                 xaxis=dict(tickangle=-45)
             )
             apply_plotly_theme(fig_v3)
-            st.plotly_chart(fig_v3, width='stretch')
+            st.plotly_chart(fig_v3, use_container_width=True)

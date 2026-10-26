@@ -159,14 +159,14 @@ with col_bat:
     if bat_stats:
         st.dataframe(pd.DataFrame(bat_stats).rename(columns={
             "batter":"Batter","runs":"R","balls":"B","fours":"4s","sixes":"6s","sr":"SR"}),
-            width='stretch', hide_index=True)
+            use_container_width=True, hide_index=True)
 with col_bowl:
     st.markdown("**Bowling Figures**")
     bowl_stats = get_bowler_stats(sel_match_id, sel_innings)
     if bowl_stats:
         st.dataframe(pd.DataFrame(bowl_stats).rename(columns={
             "bowler":"Bowler","overs":"O","runs":"R","wkts":"W","economy":"Econ"}),
-            width='stretch', hide_index=True)
+            use_container_width=True, hide_index=True)
 
 # -- Ball-by-ball -------------------------------------------------------------
 with st.expander("?? Ball-by-Ball Delivery Log"):
@@ -187,6 +187,6 @@ with st.expander("?? Ball-by-Ball Delivery Log"):
         st.dataframe(df_del[[c for c in cols_show if c in df_del.columns]].rename(columns={
             "ball":"Ball","batter":"Batter","bowler":"Bowler","batter_runs":"Bat R",
             "extras_runs":"Ext","total_runs":"Total","wicket_kind":"Wkt","dismissed_batter":"Out"}),
-            width='stretch', hide_index=True)
+            use_container_width=True, hide_index=True)
     else:
         st.info("No delivery data for this innings.")

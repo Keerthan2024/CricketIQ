@@ -44,7 +44,7 @@ if mv_data:
     fig.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                       font_color="#e2e8f0",yaxis=dict(autorange="reversed"),
                       coloraxis_showscale=False, height=600)
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
 
 # -- Avg first-innings score --------------------------------------------------
 st.markdown('<div class="section-header">Average First-Innings Scores by Venue</div>', unsafe_allow_html=True)
@@ -68,11 +68,11 @@ if avg_data:
         fig2.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                            font_color="#e2e8f0",yaxis=dict(autorange="reversed"),
                            coloraxis_showscale=False)
-        st.plotly_chart(fig2, width='stretch')
+        st.plotly_chart(fig2, use_container_width=True)
     with col_b:
         st.dataframe(df_avg.rename(columns={"venue":"Venue","avg_score":"Avg Score",
                                              "highest":"Highest","matches":"Matches"}),
-                     width='stretch', hide_index=True)
+                     use_container_width=True, hide_index=True)
 
 # -- Total runs by venue ------------------------------------------------------
 st.markdown('<div class="section-header">Total Runs Scored at Venue</div>', unsafe_allow_html=True)
@@ -94,4 +94,4 @@ if rv_data:
     fig3.update_traces(textposition="top center", textfont_size=9)
     fig3.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                        font_color="#e2e8f0",coloraxis_showscale=False)
-    st.plotly_chart(fig3, width='stretch')
+    st.plotly_chart(fig3, use_container_width=True)

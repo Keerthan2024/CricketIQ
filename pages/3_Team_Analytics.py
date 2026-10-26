@@ -67,18 +67,18 @@ if rec_data:
                      labels={"value":"Matches","variable":"Result","team":"Team"})
         fig.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                           font_color="#e2e8f0",xaxis_tickangle=-45,legend_title="")
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
     with col_b:
         st.dataframe(df.rename(columns={"team":"Team","matches_played":"Played",
                                          "wins":"Wins","losses":"Losses","win_pct":"Win %"}),
-                     width='stretch', hide_index=True)
+                     use_container_width=True, hide_index=True)
 
     # Win % treemap
     fig2 = px.treemap(df, path=["team"], values="matches_played", color="win_pct",
                       color_continuous_scale=["#1e3a5f","#22c55e"],
                       title="Team Win Percentage (size = matches played)")
     fig2.update_layout(paper_bgcolor="rgba(0,0,0,0)",font_color="#e2e8f0")
-    st.plotly_chart(fig2, width='stretch')
+    st.plotly_chart(fig2, use_container_width=True)
 
 # -- Head-to-head -------------------------------------------------------------
 st.markdown('<div class="section-header">Head-to-Head Comparison</div>', unsafe_allow_html=True)
@@ -111,7 +111,7 @@ if len(teams) >= 2:
             hole=0.4,
             marker_colors=["#3b82f6","#f59e0b","#6b7280"]))
         fig3.update_layout(title=f"{t1} vs {t2}", paper_bgcolor="rgba(0,0,0,0)", font_color="#e2e8f0")
-        st.plotly_chart(fig3, width='stretch')
+        st.plotly_chart(fig3, use_container_width=True)
     else:
         st.info("No matches found between these teams.")
 
@@ -141,6 +141,6 @@ if sp_data:
                        font_color="#e2e8f0",xaxis_tickangle=-45,legend_title="")
     fig4.update_xaxes(type="category")
     fig4.update_traces(connectgaps=True, line_width=2.5)
-    st.plotly_chart(fig4, width='stretch')
+    st.plotly_chart(fig4, use_container_width=True)
 else:
     st.info(f"No data for {sel_team}.")

@@ -73,14 +73,14 @@ with col_a:
     fig.update_traces(textposition="top center", textfont_size=8)
     fig.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                       font_color="#e2e8f0",coloraxis_colorbar=dict(title="Std Dev"))
-    st.plotly_chart(fig, width='stretch')
+    st.plotly_chart(fig, use_container_width=True)
 
 with col_b:
     st.dataframe(df.rename(columns={
         "batter":"Batter","innings_count":"Inn","total_runs":"Runs",
         "average":"Avg","std_dev":"Std Dev"}).style.format(
             {"Avg":"{:.1f}","Std Dev":"{:.1f}"}),
-        width='stretch', hide_index=True)
+        use_container_width=True, hide_index=True)
 
 # -- Bar chart: low std_dev players -------------------------------------------
 st.markdown('<div class="section-header">Consistency Ranking (lower bar = more consistent)</div>', unsafe_allow_html=True)
@@ -91,4 +91,4 @@ fig2 = px.bar(df.head(20).sort_values("std_dev"), x="std_dev", y="batter",
               labels={"std_dev":"Std Dev","batter":"Batter","average":"Avg"})
 fig2.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                    font_color="#e2e8f0")
-st.plotly_chart(fig2, width='stretch')
+st.plotly_chart(fig2, use_container_width=True)

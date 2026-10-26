@@ -61,12 +61,12 @@ else:
                      title="Top 15 Run Scorers", labels={"total_runs":"Runs","batter":"Batter","strike_rate":"SR"})
         fig.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",font_color="#e2e8f0",
                           yaxis=dict(autorange="reversed"),coloraxis_colorbar=dict(title="SR"))
-        st.plotly_chart(fig, width='stretch')
+        st.plotly_chart(fig, use_container_width=True)
     with col_b:
         st.dataframe(df[["batter","total_runs","innings","batting_avg","strike_rate","fours","sixes"]].rename(
             columns={"batter":"Batter","total_runs":"Runs","innings":"Inn","batting_avg":"Avg",
                      "strike_rate":"SR","fours":"4s","sixes":"6s"}),
-            width='stretch', hide_index=True)
+            use_container_width=True, hide_index=True)
 
 st.markdown('<div class="section-header">Highest Individual Innings</div>', unsafe_allow_html=True)
 
@@ -86,7 +86,7 @@ if innings_data:
                       title="Top 50 Innings: Runs vs Balls (size = sixes)",
                       labels={"runs":"Runs","balls":"Balls Faced"})
     fig2.update_layout(plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",font_color="#e2e8f0")
-    st.plotly_chart(fig2, width='stretch')
+    st.plotly_chart(fig2, use_container_width=True)
 
 st.markdown('<div class="section-header">Boundary Leaders</div>', unsafe_allow_html=True)
 
@@ -109,7 +109,7 @@ if bnd_data:
     fig3.update_layout(barmode="stack", title="Top 15 Boundary Hitters (4s + 6s)",
                        plot_bgcolor="rgba(0,0,0,0)",paper_bgcolor="rgba(0,0,0,0)",
                        font_color="#e2e8f0", xaxis_tickangle=-45)
-    st.plotly_chart(fig3, width='stretch')
+    st.plotly_chart(fig3, use_container_width=True)
 
 st.markdown('<div class="section-header">Season Batting Trends</div>', unsafe_allow_html=True)
 
@@ -136,4 +136,4 @@ if trend_data:
                        xaxis_tickangle=-45)
     fig4.update_xaxes(type="category")
     fig4.update_traces(connectgaps=True, line_width=2.5)
-    st.plotly_chart(fig4, width='stretch')
+    st.plotly_chart(fig4, use_container_width=True)
