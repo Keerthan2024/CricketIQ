@@ -6,13 +6,22 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def _get_setting(key: str, default: str = "") -> str:
+    try:
+        import streamlit as st
+        if hasattr(st, "secrets") and key in st.secrets:
+            return str(st.secrets[key])
+    except Exception:
+        pass
+    return os.getenv(key, default)
+
 # MongoDB
-MONGODB_URI: str = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
-DATABASE_NAME: str = os.getenv("DATABASE_NAME", "CricketIQ")
+MONGODB_URI: str = _get_setting("MONGODB_URI", "mongodb://localhost:27017/")
+DATABASE_NAME: str = _get_setting("DATABASE_NAME", "CricketIQ")
 
 # Importer
-DATA_DIR: str = os.getenv("DATA_DIR", "./data")
-BATCH_SIZE: int = int(os.getenv("BATCH_SIZE", "500"))
+DATA_DIR: str = _get_setting("DATA_DIR", "./data")
+BATCH_SIZE: int = int(_get_setting("BATCH_SIZE", "500"))
 
 # Collections
 COLLECTION_MATCHES: str = "matches"
